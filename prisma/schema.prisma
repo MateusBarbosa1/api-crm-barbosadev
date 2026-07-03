@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Caixa {
+  id           String   @id @default(uuid())
+  data         String
+  faturamento  Float
+  lucro        Float
+  despesas     Float
+}
