@@ -47,10 +47,27 @@ async function setFaturamento(id, value) {
     return false;
   }
 }
+async function setDespesas(id, value) {
+  try {
+    const caixaOld = await prisma.caixa.findUnique({ where: { id: id } });
+    const caixa = await prisma.caixa.updateMany({
+      where: { id: id },
+      data: {
+        despesas: value,
+        lucro: caixaOld.faturamento - value,
+      },
+    });
+    return caixa;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
 
 module.exports = {
   setCaixa,
   getCaixa,
   deleteCaixa,
   setFaturamento,
+  setDespesas,
 };

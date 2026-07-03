@@ -12,4 +12,7 @@ module.exports = (app) => {
   app.post("/faturamento", (req, res) => {
     caixaControllers.setFaturamento(app, req, res);
   });
+  app.post("/despesas", (req, res) => {
+    caixaControllers.setDespesas(app, req, res);
+  });
 };

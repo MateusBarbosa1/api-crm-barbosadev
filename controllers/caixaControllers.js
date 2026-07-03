@@ -62,3 +62,17 @@ module.exports.setFaturamento = async (app, req, res) => {
     data: caixa,
   });
 };
+module.exports.setDespesas = async (app, req, res) => {
+  const data = req.body;
+  const caixa = await caixaModels.setDespesas(data.id, data.despesas);
+  if (caixa == false) {
+    res.status(500).json({
+      success: false,
+      message: "Error set 'Despesas'",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    data: caixa,
+  });
+};
