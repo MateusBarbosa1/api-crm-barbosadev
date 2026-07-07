@@ -14,3 +14,12 @@ model Caixa {
   lucro        Float
   despesas     Float
 }
+model Metas {
+  id_meta String @id @default(uuid())
+  createdAt DateTime @default(now())
+  name String
+  description String
+  dataCaixa String
+  type String
+  progress Float
+}
