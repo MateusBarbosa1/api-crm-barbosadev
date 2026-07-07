@@ -26,7 +26,9 @@ async function createMeta(data) {
 
 async function updateMetas(id, data) {
   try {
-    const updatedMeta = await prisma.metas.updateMany({
+    // update (singular) exige que id_meta seja @id ou @unique no schema,
+    // e retorna o registro atualizado (updateMany retorna só { count })
+    const updatedMeta = await prisma.metas.update({
       where: {
         id_meta: id,
       },
@@ -41,7 +43,7 @@ async function updateMetas(id, data) {
 
 async function deleteMeta(id) {
   try {
-    const metaDeleted = await prisma.metas.deleteMany({
+    const metaDeleted = await prisma.metas.delete({
       where: {
         id_meta: id,
       },

@@ -1,64 +1,99 @@
 const metasModel = require("../models/metasModel.js");
 
 module.exports.getMetas = async (app, req, res) => {
-  const metas = await metasModel.getMetas();
-  if (metas == false) {
-    res.status(500).json({
-      success: false,
-      message: "Error find 'metas'",
+  try {
+    const metas = await metasModel.getMetas();
+
+    if (metas === false) {
+      return res.status(500).json({
+        success: false,
+        message: "Error find 'metas'",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: metas,
     });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Unexpected error" });
   }
-  res.status(200).json({
-    success: true,
-    data: metas,
-  });
 };
+
 module.exports.createMetas = async (app, req, res) => {
-  const data = req.body;
+  try {
+    const data = req.body;
+    const meta = await metasModel.createMeta(data);
 
-  const meta = await metasModel.createMeta(data);
+    if (meta === false) {
+      return res.status(500).json({
+        success: false,
+        message: "Error create 'meta'",
+      });
+    }
 
-  if (meta == false) {
-    res.status(500).json({
-      success: false,
-      message: "Error create 'meta'",
+    return res.status(201).json({
+      success: true,
+      data: meta,
     });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Unexpected error" });
   }
-  res.status(201).json({
-    success: true,
-    data: meta,
-  });
 };
+
 module.exports.updateMetas = async (app, req, res) => {
-  const id = req.body.id;
-  const data = req.body.data;
+  try {
+    const id = req.body.id;
+    const data = req.body.data;
 
-  const metaUpdated = await metasModel.updateMetas(id, data);
-  if (metaUpdated == false) {
-    res.status(500).json({
-      success: false,
-      message: "Error update meta",
+    const metaUpdated = await metasModel.updateMetas(id, data);
+
+    if (metaUpdated === false) {
+      return res.status(500).json({
+        success: false,
+        message: "Error update meta",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: metaUpdated,
     });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Unexpected error" });
   }
-
-  res.status(200).json({
-    success: true,
-    data: metaUpdated,
-  });
 };
+
 module.exports.deleteMetas = async (app, req, res) => {
-  const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-  const metaDeleted = await metasModel.deleteMeta(id);
-  if (metaDeleted == false) {
-    res.status(500).json({
-      success: false,
-      message: "Error delete meta",
+    const metaDeleted = await metasModel.deleteMeta(id);
+
+    if (metaDeleted === false) {
+      return res.status(500).json({
+        success: false,
+        message: "Error delete meta",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: metaDeleted,
     });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Unexpected error" });
   }
-
-  res.status(200).json({
-    success: true,
-    data: metaDeleted,
-  });
 };
