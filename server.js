@@ -16,8 +16,9 @@ app.set("views", path.join(__dirname, "./views"));
 
 app.use(
   cors({
-    origin: ["https://barbosadev-crm.vercel.app", "http://localhost:5500"],
-    credentials: true,
+    origin: "*", // ou o domínio do seu site estático, se for fixo
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   }),
 );
 const routesPath = path.join(__dirname, "routes");

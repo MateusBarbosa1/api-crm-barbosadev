@@ -23,3 +23,15 @@ model Metas {
   type String
   progress Float
 }
+model Campanhas {
+  id_campanha String @id @default(uuid())
+  dateInit DateTime
+  dateFinish DateTime
+  name String
+  canal String
+  value_inv Float
+  cpi Float
+  cpv Float
+  interessados Int
+  vendas Int
+}
