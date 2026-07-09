@@ -24,8 +24,11 @@ module.exports.createCampanha = async (app, req, res) => {
     value_inv: req.body.value_inv,
     interessados: req.body.interessados,
     vendas: req.body.vendas,
-    cpi: req.body.value_inv / req.body.interessados,
-    cpv: req.body.value_inv / req.body.vendas,
+    cpi:
+      req.body.interessados > 0
+        ? req.body.value_inv / req.body.interessados
+        : 0,
+    cpv: req.body.vendas > 0 ? req.body.value_inv / req.body.vendas : 0,
   };
 
   const campanhaCreated = await campanhasModels.createCampanha(data);
@@ -51,8 +54,11 @@ module.exports.updateCampanha = async (app, req, res) => {
     value_inv: req.body.value_inv,
     interessados: req.body.interessados,
     vendas: req.body.vendas,
-    cpi: req.body.value_inv / req.body.interessados,
-    cpv: req.body.value_inv / req.body.vendas,
+    cpi:
+      req.body.interessados > 0
+        ? req.body.value_inv / req.body.interessados
+        : 0,
+    cpv: req.body.vendas > 0 ? req.body.value_inv / req.body.vendas : 0,
   };
 
   const campanhaUpdated = await campanhasModels.updateCampanhas(id, data);
