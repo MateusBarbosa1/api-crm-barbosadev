@@ -35,3 +35,12 @@ model Campanhas {
   interessados Int
   vendas Int
 }
+model Atividades {
+  id_atividade String @id @default(uuid())
+  name String
+  category String
+  data_prazo String
+  status String
+  progress Float
+  period String
+}
